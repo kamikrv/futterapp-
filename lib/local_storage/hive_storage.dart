@@ -1,4 +1,3 @@
-
 import 'package:github_app/models/house.dart';
 import 'package:hive_flutter/adapters.dart';
 

@@ -107,6 +107,9 @@ class AddNewTab extends StatelessWidget {
                 return null;
               }),
           ElevatedButton (
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+              ),
               onPressed:() async {
                 final house = House(
                   price: priceController.value.text,

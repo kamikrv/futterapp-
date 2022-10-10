@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _tabs = [
     Home(),
     const FavoritesTab(),
-     AddNewTab(),
+    AddNewTab(),
     const ProfileTab()
   ];
 
@@ -61,9 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.add),
                 label: 'Add new'),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.person),
-            //     label: 'My profile'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'My profile'),
               ],
             ),
             tabBuilder: (BuildContext context, index) {

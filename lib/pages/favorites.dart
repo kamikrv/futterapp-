@@ -21,9 +21,19 @@ class _FavoritesTabState extends State<FavoritesTab> {
   }
 
   Future refresh() async {
-    houses = await HiveStorage.loadHouses();
+    await _getData();
     setState(()  {
     });
+  }
+
+  Future<void> _getData() async {
+    houses.clear();
+    List<House> allHouses = await HiveStorage.loadHouses();
+    for (var h in allHouses) {
+      if (h.isFavorite == true) {
+        houses.add(h);
+      }
+    }
   }
 
   @override

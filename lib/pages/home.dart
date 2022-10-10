@@ -65,15 +65,15 @@ class _HomeState extends State<Home> {
                                   Text('Price: ' + house.price),
                                   Text('Count of rooms: ' + house.countRooms),
                                   Text('City: ' + house.city),
-                  ]
+                                ]
                               ),
                             ]
                         )
                     )
                 );
               }
-              ),)
-
+              ),
+          )
       );
   }
 }

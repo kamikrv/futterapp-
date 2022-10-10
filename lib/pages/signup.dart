@@ -7,10 +7,6 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-  @override
-  _SignUpPageState createState() => _SignUpPageState();
-
-
 class _SignUpPageState extends State {
   @override
   Widget build(BuildContext context) {
@@ -19,45 +15,66 @@ class _SignUpPageState extends State {
           flex: 4,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  labelText: 'Имя',
-                  labelStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              SizedBox(
+            children: <Widget>[
+              TextFormField(
+                  style: const TextStyle(fontSize: 22, color: Colors.grey),
+                  decoration: const InputDecoration(labelText: 'Name:'),
+                  maxLines: 10,
+                  minLines: 1,
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
                 height: 15,
               ),
-              TextField(
-                decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                    labelText: 'E-mail',
-                    labelStyle: TextStyle(color: Colors.grey)),
-              ),
-              SizedBox(
+              TextFormField(
+                  style: const TextStyle(fontSize: 22, color: Colors.grey),
+                  decoration: const InputDecoration(labelText: 'Login:'),
+                  maxLines: 2,
+                  minLines: 1,
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
                 height: 15,
               ),
-              TextField(
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  labelText: 'Пароль',
-                  labelStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              SizedBox(
+              TextFormField(
+                  style: const TextStyle(fontSize: 22, color: Colors.grey),
+                  decoration: const InputDecoration(labelText: 'Password:'),
+                  maxLines: 3,
+                  minLines: 1,
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
                 height: 15,
               ),
-            ],
-
+              TextFormField(
+                  style: const TextStyle(fontSize: 22, color: Colors.grey),
+                  decoration: const InputDecoration(labelText: 'Phone number:'),
+                  maxLines: 2,
+                  minLines: 1,
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+                const SizedBox(
+                height: 15,
+              ),
+              ]
           ),
-        )
+        ),
     );
   }
 }
