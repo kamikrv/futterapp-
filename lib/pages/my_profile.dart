@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/logins.dart';
+import '../pages/signup.dart';
+import '../pages/signin.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -24,21 +25,39 @@ List<MyUser> users = [];
         body:Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-        ElevatedButton (
-          onPressed: null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey,
-              padding:
-              const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+            const SizedBox(
+              width: 200,
+              height: 15,
             ),
+        ElevatedButton (
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SignInPage() ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            padding:
+            const EdgeInsets.symmetric(horizontal: 170, vertical: 10),
+          ),
           child: const Text('Sing in'),
         ),
+            const SizedBox(
+              width: 200,
+              height: 15,
+            ),
         ElevatedButton (
-          onPressed: null,
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  SignUpPage()),
+            );
+          },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.green,
               padding:
-              const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              const EdgeInsets.symmetric(horizontal: 169, vertical: 10),
             ),
           child: const Text('Sing up'),
         )

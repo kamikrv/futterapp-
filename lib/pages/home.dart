@@ -62,9 +62,9 @@ class _HomeState extends State<Home> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Price: ' + house.price),
-                                  Text('Count of rooms: ' + house.countRooms),
-                                  Text('City: ' + house.city),
+                                  Text('Price: ${house.price}'),
+                                  Text('Count of rooms: ${house.countRooms}'),
+                                  Text('City: ${house.city}'),
                                 ]
                               ),
                             ]

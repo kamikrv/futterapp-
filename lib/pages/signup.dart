@@ -11,70 +11,129 @@ class _SignUpPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Expanded(
-          flex: 4,
-          child: Column(
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        title: const Text('Sign Up'),
+        centerTitle: true,
+      ),
+        body:  Padding(
+        padding:EdgeInsets.fromLTRB(8, 16, 8, 16),
+    child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              TextFormField(
-                  style: const TextStyle(fontSize: 22, color: Colors.grey),
-                  decoration: const InputDecoration(labelText: 'Name:'),
-                  maxLines: 10,
-                  minLines: 1,
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return 'Field is required';
-                    }
-                    return null;
-                  }),
               const SizedBox(
+                width: 200,
                 height: 15,
               ),
               TextFormField(
-                  style: const TextStyle(fontSize: 22, color: Colors.grey),
-                  decoration: const InputDecoration(labelText: 'Login:'),
-                  maxLines: 2,
-                  minLines: 1,
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return 'Field is required';
-                    }
-                    return null;
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                  style: const TextStyle(fontSize: 22, color: Colors.grey),
-                  decoration: const InputDecoration(labelText: 'Password:'),
-                  maxLines: 3,
-                  minLines: 1,
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return 'Field is required';
-                    }
-                    return null;
-                  }),
-              const SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                  style: const TextStyle(fontSize: 22, color: Colors.grey),
-                  decoration: const InputDecoration(labelText: 'Phone number:'),
-                  maxLines: 2,
-                  minLines: 1,
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return 'Field is required';
-                    }
-                    return null;
-                  }),
-                const SizedBox(
-                height: 15,
-              ),
-              ]
-          ),
+              decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.drive_file_rename_outline),
+              labelText: 'Name:',
+              border: OutlineInputBorder(),
         ),
-    );
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.person),
+                    labelText: 'Login:',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    labelText: 'e-mail:',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.password),
+                    labelText: 'Password:',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.phone),
+                    labelText: 'Phone number:',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.location_city),
+                    labelText: 'City:',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value){
+                    if (value == null || value.isEmpty) {
+                      return 'Field is required';
+                    }
+                    return null;
+                  }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
+              ElevatedButton (
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                ),
+                child: const Text('Sing up'),
+              )
+            ]
+        ),
+    ));
   }
 }
