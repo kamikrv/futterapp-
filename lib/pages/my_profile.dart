@@ -22,7 +22,9 @@ List<MyUser> users = [];
         title: const Text('Roof.kz'),
         centerTitle: true,
       ),
-        body:Column(
+        body:Padding(
+        padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const SizedBox(
@@ -39,7 +41,7 @@ List<MyUser> users = [];
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
             padding:
-            const EdgeInsets.symmetric(horizontal: 170, vertical: 10),
+            const EdgeInsets.symmetric(horizontal: 160, vertical: 20),
           ),
           child: const Text('Sing in'),
         ),
@@ -57,12 +59,13 @@ List<MyUser> users = [];
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green,
               padding:
-              const EdgeInsets.symmetric(horizontal: 169, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 160, vertical: 20),
             ),
           child: const Text('Sing up'),
         )
         ]
     ),
+        )
     );
   }
 

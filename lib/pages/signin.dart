@@ -21,8 +21,8 @@ class _SignInPageState extends State {
         title: const Text('Sign In'),
     centerTitle: true,
     ),
-      body: Form(
-      //key: _formKey,
+      body: Padding(
+      padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[

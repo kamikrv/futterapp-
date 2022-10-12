@@ -124,6 +124,10 @@ class AddNewTab extends StatelessWidget {
                     }
                     return null;
                   }),
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
               ElevatedButton (
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,

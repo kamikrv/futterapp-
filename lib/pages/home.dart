@@ -36,7 +36,9 @@ class _HomeState extends State<Home> {
   ),
           body: RefreshIndicator(
           onRefresh: refresh,
-          child: ListView.builder(
+          child: Padding(
+          padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+            child: ListView.builder(
               itemCount: houses.length,
               itemBuilder: (BuildContext context, int index) {
                 House house = houses[index];
@@ -50,12 +52,15 @@ class _HomeState extends State<Home> {
                     child: Card(
                         shadowColor: Colors.grey,
                         elevation: 10,
-                        child: Row(
+                        child:
+                        Padding(
+                        padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                           child:Row(
                             children: [
                                Image(
                                 image: NetworkImage(house.url),
-                                width: 100,
-                                height: 100,
+                                width: 150,
+                                height: 150,
                               ),
                               const SizedBox(width: 10),
                               Column(
@@ -69,11 +74,11 @@ class _HomeState extends State<Home> {
                               ),
                             ]
                         )
-                    )
+                    ))
                 );
               }
               ),
-          )
+          ) )
       );
   }
 }

@@ -17,7 +17,7 @@ class _SignUpPageState extends State {
         centerTitle: true,
       ),
         body:  Padding(
-        padding:EdgeInsets.fromLTRB(8, 16, 8, 16),
+        padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
     child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
