@@ -52,6 +52,7 @@ class _SignInPageState extends State {
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),
+                obscureText: true,
                 validator: (value){
                  if (value == null || value.isEmpty) {
                    return 'Field is required';
