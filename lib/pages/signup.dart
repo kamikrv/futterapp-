@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:github_app/models/signUp.dart';
+
+import 'home.dart';
+export 'package:github_app/models/signUp.dart';
 
 
 class SignUpPage extends StatefulWidget {
@@ -9,17 +13,27 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final nameController = TextEditingController();
+    final loginController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    final phoneController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
         title: const Text('Sign Up'),
         centerTitle: true,
       ),
-        body:  Padding(
+        body: Form(
+        key: _formKey,
+        child: Padding(
         padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
-    child:Column(
+        child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               const SizedBox(
@@ -106,25 +120,31 @@ class _SignUpPageState extends State {
                 width: 200,
                 height: 15,
               ),
-              TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.location_city),
-                    labelText: 'City:',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return 'Field is required';
-                    }
-                    return null;
-                  }),
-              const SizedBox(
-                width: 200,
-                height: 15,
-              ),
               ElevatedButton (
-                onPressed: (){
-                  Navigator.pop(context);
+                onPressed: ()
+                async {
+                  final house = MyUser(
+                    name: nameController.value.text,
+                    login: loginController.value.text,
+                    email: emailController.value.text,
+                    password: passwordController.value.text,
+                    phone: phoneController.value.text,
+                  );
+                  if (_formKey.currentState!.validate()) {
+                   _formKey.currentState!.save();
+                     ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
+                   nameController.clear();
+                   loginController.clear();
+                   emailController.clear();
+                   passwordController.clear();
+                   phoneController.clear();
+                }
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) =>  Home()),
+                  // );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
@@ -132,9 +152,9 @@ class _SignUpPageState extends State {
                   const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 ),
                 child: const Text('Sing up'),
-              )
+              ),
             ]
         ),
-    ));
+    )));
   }
 }

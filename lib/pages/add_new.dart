@@ -132,7 +132,8 @@ class AddNewTab extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,
                   ),
-                  onPressed:() async {
+                  onPressed:()
+                  async {
                     final house = House(
                       price: priceController.value.text,
                       countRooms: countRoomsController.value.text,
@@ -142,6 +143,12 @@ class AddNewTab extends StatelessWidget {
                       description: descriptionController.value.text,
                       isFavorite: false,
                     );
+                    priceController.clear();
+                    countRoomsController.clear();
+                    cityController.clear();
+                    areaController.clear();
+                    imageController.clear();
+                    descriptionController.clear();
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       ScaffoldMessenger.of(context).showSnackBar(
