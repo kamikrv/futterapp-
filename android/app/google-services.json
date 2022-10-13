@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "708929122637",
+    "project_id": "roof-kami",
+    "storage_bucket": "roof-kami.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708929122637:android:3c68109dbe4f12335f0704",
+        "android_client_info": {
+          "package_name": "com.kami.roofkz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708929122637-lilmqb8d7lsgqsho541qi4vdvjfuiijj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBeRjRfwPjlERdusyp5OM2Hp8Ak1NeM_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708929122637-lilmqb8d7lsgqsho541qi4vdvjfuiijj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "708929122637-pndaec37k19d9lafqldrectfhaejshdm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.github"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

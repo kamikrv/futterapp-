@@ -7,12 +7,15 @@ import 'package:github_app/pages/my_profile.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'models/house.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
 
 Future<void> main() async {
   await Hive.initFlutter();
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Hive.registerAdapter(HouseAdapter());
 
   // if (await HiveStorage.loadHouses().then((value) => value.isEmpty)) {
@@ -23,13 +26,14 @@ Future<void> main() async {
   //   List<House> houses = [house1, house2, house3, house4];
   // }
 
-  runApp(MaterialApp(
-    theme: ThemeData(
-      primaryColor: Colors.grey,
-    ),
-    home: const MyHomePage (),
-  )
-  );
+  runApp(
+    MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.grey,
+      ),
+      home: const MyHomePage (),
+      )
+    );
   }
 
 class MyHomePage extends StatefulWidget {
@@ -40,6 +44,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   final List<Widget> _tabs = [
     Home(),
     const FavoritesTab(),
@@ -47,7 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
     const ProfileTab()
   ];
 
+
+
   @override
+  void initState() {
+    super.initState();
+
+  }
+
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
