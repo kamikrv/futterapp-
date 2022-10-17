@@ -34,7 +34,8 @@ class _HomeState extends State<Home> {
             title: const Text('Roof.kz'),
             centerTitle: true,
   ),
-          body: RefreshIndicator(
+          body:
+          RefreshIndicator(
           onRefresh: refresh,
           child: Padding(
           padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),

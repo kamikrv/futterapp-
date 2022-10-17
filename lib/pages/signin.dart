@@ -9,7 +9,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State {
-
   @override
   Widget build(BuildContext context) {
 
@@ -19,7 +18,8 @@ class _SignInPageState extends State {
         title: const Text('Sign In'),
     centerTitle: true,
     ),
-      body: Padding(
+      body: SingleChildScrollView(
+      child: Padding(
       padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -29,11 +29,10 @@ class _SignInPageState extends State {
             height: 15,
           ),
           TextFormField(
-            //controller: ,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.person),
               hintStyle: TextStyle(fontWeight: FontWeight.bold),
-              labelText: 'Login',
+              labelText: 'Email',
               border: OutlineInputBorder(),
             ),
             validator: (value){
@@ -64,18 +63,20 @@ class _SignInPageState extends State {
             height: 15,
           ),
           ElevatedButton (
-            onPressed: () {
+            onPressed: (){
             Navigator.pop(context);
-    },
-
+            },
             style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
             padding:
               const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
             ),
              child: const Text('Sing in'),
-    )
+          )
         ],
-    )));
+      )
+      )
+      )
+    );
   }
 }

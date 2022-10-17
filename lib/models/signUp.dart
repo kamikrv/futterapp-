@@ -1,4 +1,3 @@
-
 class MyUser{
   final String name;
   final String login;
