@@ -1,82 +1,167 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:github_app/pages/signup.dart';
+import 'forget_password.dart';
 
 class SignInPage extends StatefulWidget {
-  SignInPage({super.key});
+  const SignInPage({super.key});
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  SignInPageState createState() => SignInPageState();
 }
 
-class _SignInPageState extends State {
+class SignInPageState extends State {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Text('Sign In'),
-    centerTitle: true,
-    ),
-      body: SingleChildScrollView(
-      child: Padding(
-      padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(
-            width: 200,
-            height: 15,
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.person),
-              hintStyle: TextStyle(fontWeight: FontWeight.bold),
-              labelText: 'Email',
-              border: OutlineInputBorder(),
-            ),
-            validator: (value){
-              if (value == null || value.isEmpty) {
-               return 'Field is required';
-               }
-               return null;
-            }),
-          const SizedBox(
-            width: 200,
-            height: 15,
-          ),
-          TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock),
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-                obscureText: true,
-                validator: (value){
-                 if (value == null || value.isEmpty) {
-                   return 'Field is required';
-                 }
-                 return null;
-              }),
-          const SizedBox(
-            width: 200,
-            height: 15,
-          ),
-          ElevatedButton (
-            onPressed: (){
-            Navigator.pop(context);
-            },
-            style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            padding:
-              const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            ),
-             child: const Text('Sing in'),
-          )
-        ],
-      )
-      )
-      )
+        body: SingleChildScrollView(
+            child: Padding(
+                padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                child: GestureDetector(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(
+                        width: 200,
+                        height: 100,
+                      ),
+                      const Icon(Icons.house,
+                      size: 100,
+                      color: Colors.grey,),
+                      const Text('Roof.kz',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 40)
+                      ),
+                      const SizedBox(
+                        width: 200,
+                        height: 150,
+                      ),
+                      TextFormField(
+                          controller: _emailController,
+                          decoration:  InputDecoration(
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            prefixIcon: const Icon(Icons.person),
+                            hintStyle: const TextStyle(fontWeight: FontWeight.bold),
+                            labelText: 'Email',
+                            fillColor: Colors.grey.shade200,
+                            filled: true,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value){
+                            if (value == null || value.isEmpty) {
+                              return 'Field is required';
+                            }
+                            return null;
+                          }
+                          ),
+                      const SizedBox(
+                        width: 200,
+                        height: 15,
+                      ),
+                      TextFormField(
+                          controller: _passwordController,
+                          decoration:  InputDecoration(
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            prefixIcon: const Icon(Icons.lock),
+                            labelText: 'Password',
+                            fillColor: Colors.grey.shade200,
+                            filled: true,
+                            border: const OutlineInputBorder(),
+                          ),
+                          obscureText: true,
+                          validator: (value){
+                            if (value == null || value.isEmpty) {
+                              return 'Field is required';
+                            }
+                            return null;
+                          }
+                          ),
+                      const SizedBox(
+                        width: 200,
+                        height: 15,
+                      ),
+                      GestureDetector(
+                        onTap: () { Navigator.push(context,
+                            MaterialPageRoute(builder: (context){
+                          return const ForgotPasswordPage();
+                            }
+                            ));
+                          },
+                          child: const Text('Forgot password?',
+                            style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),)
+                      ),
+                      const SizedBox(
+                        width: 200,
+                        height: 15,
+                      ),
+                      ElevatedButton (
+                        onPressed: signIn,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                        ),
+                        child: const Text('Sing in'),
+                      ),
+                      Padding (
+                          padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text('Do not have an account? ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const SignUpPage() ),
+                                  );
+                                },
+                                child: const Text(' sign up',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                ),
+                              )
+                            ],
+                          )
+                      )
+                    ],
+                  ),
+                )
+            )
+        )
     );
   }
 }

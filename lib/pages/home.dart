@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:github_app/local_storage/hive_storage.dart';
 import '../models/house.dart';
@@ -28,58 +29,59 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.grey,
-            title: const Text('Roof.kz'),
-            centerTitle: true,
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.grey,
+          title: const Text('Roof.kz'),
+          centerTitle: true,
   ),
-          body:
-          RefreshIndicator(
-          onRefresh: refresh,
-          child: Padding(
-          padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
-            child: ListView.builder(
-              itemCount: houses.length,
-              itemBuilder: (BuildContext context, int index) {
-                House house = houses[index];
-                return GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  HomeDescription(house: house,)),
-                      );
-                      },
-                    child: Card(
-                        shadowColor: Colors.grey,
-                        elevation: 10,
-                        child:
-                        Padding(
-                        padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                           child:Row(
-                            children: [
-                               Image(
-                                image: NetworkImage(house.url),
-                                width: 150,
-                                height: 150,
-                              ),
-                              const SizedBox(width: 10),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Price: ${house.price}'),
-                                  Text('Count of rooms: ${house.countRooms}'),
-                                  Text('City: ${house.city}'),
-                                ]
-                              ),
-                            ]
+        body:
+        RefreshIndicator(
+            onRefresh: refresh,
+            child: Padding(
+              padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+              child: ListView.builder(
+                  itemCount: houses.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    House house = houses[index];
+                    return GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  HomeDescription(house: house,)),
+                          );
+                          },
+                        child: Card(
+                            shadowColor: Colors.grey,
+                            elevation: 10,
+                            child: Padding(
+                                padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                                child:Row(
+                                    children: [
+                                      Image(
+                                        image: NetworkImage(house.url),
+                                        width: 150,
+                                        height: 150,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Price: ${house.price}'),
+                                            Text('Count of rooms: ${house.countRooms}'),
+                                            Text('City: ${house.city}'),
+                                          ]
+                                      ),
+                                    ]
+                                )
+                            )
                         )
-                    ))
-                );
-              }
-              ),
-          ) )
-      );
+                    );
+                  }
+                  ),
+            )
+        )
+    );
   }
 }

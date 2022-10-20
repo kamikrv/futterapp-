@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:github_app/pages/add_new.dart';
 import 'package:github_app/pages/favorites.dart';
 import 'package:github_app/pages/home.dart';
-import 'package:github_app/pages/my_profile.dart';
+import 'package:github_app/pages/main_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:github_app/pages/profile_page.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'models/house.dart';
 
 
 
 Future<void> main() async {
-  //await Hive.initFlutter();
+  await Hive.initFlutter();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //Hive.registerAdapter(HouseAdapter());
+  Hive.registerAdapter(HouseAdapter());
 
   // if (await HiveStorage.loadHouses().then((value) => value.isEmpty)) {
   //   var house1 = House(price: '76 000 000', countRooms: '4 bedrooms', city: 'Almaty', description: 'Description of this house 1', url: 'https://www.bhg.com/thmb/a-NwJnw4qLipa1EWsJThQyc7Bik=/1280x1280/smart/filters:no_upscale():focal(899x639:901x641)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg', area: '150', isFavorite: false);
@@ -26,7 +30,7 @@ Future<void> main() async {
       theme: ThemeData(
         primaryColor: Colors.grey,
       ),
-      home: const MyHomePage (),
+      home: const MainPage (),
       )
     );
   }
@@ -41,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _tabs = [
-    Home(),
+    const Home(),
     const FavoritesTab(),
     AddNewTab(),
     const ProfileTab()
