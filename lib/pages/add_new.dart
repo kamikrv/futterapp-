@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddNewTab extends StatefulWidget {
+
   const AddNewTab({super.key});
   
   @override
@@ -20,7 +21,6 @@ class AddNewTabState extends State{
 
     Future addNew() async {
       //validation checking
-      print('addnew1');
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
         // display the msg that data is being sent to the server
@@ -29,21 +29,21 @@ class AddNewTabState extends State{
         );
         // add new ads
         addNewAd(
-          priceController.text.trim(),
-          countRoomsController.text.trim(),
-          cityController.text.trim(),
-          areaController.text.trim(),
-          imageController.text.trim(),
-          descriptionController.text.trim()
+            int.parse(priceController.text.trim()),
+            int.parse(countRoomsController.text.trim()),
+            cityController.text.trim(),
+            int.parse(areaController.text.trim()),
+            imageController.text.trim(),
+            descriptionController.text.trim()
         );
       }
     }
     // add new ads
     Future addNewAd(
-        String price,
-        String countOfRooms,
+        int price,
+        int countOfRooms,
         String city,
-        String totalArea,
+        int totalArea,
         String image,
         String description) async{
       await FirebaseFirestore.instance.collection('add_new').add({
@@ -172,7 +172,7 @@ class AddNewTabState extends State{
                     width: 200,
                     height: 15,
                   ),
-                  //total area textfiled
+                  //total area textFiled
                   TextFormField(
                       controller: areaController,
                       decoration:  InputDecoration(
@@ -201,7 +201,7 @@ class AddNewTabState extends State{
                     width: 200,
                     height: 15,
                   ),
-                  //image textfiled
+                  //image textFiled
                   TextFormField(
                       controller: imageController,
                       decoration:  InputDecoration(
@@ -230,7 +230,7 @@ class AddNewTabState extends State{
                     width: 200,
                     height: 15,
                   ),
-                  // description textfiled
+                  // description textFiled
                   TextFormField(
                       controller: descriptionController,
                       decoration:  InputDecoration(

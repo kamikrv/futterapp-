@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:github_app/main.dart';
 import 'package:github_app/pages/signin.dart';
 import 'package:github_app/pages/signup.dart';
-import 'home.dart';
+import 'house/home.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);

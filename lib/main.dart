@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_app/pages/add_new.dart';
 import 'package:github_app/pages/favorites.dart';
-import 'package:github_app/pages/home.dart';
+import 'package:github_app/pages/house/home.dart';
 import 'package:github_app/pages/main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';

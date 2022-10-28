@@ -15,7 +15,7 @@ class SignUpPageState extends State {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmpasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final phoneController = TextEditingController();
 
 
@@ -52,7 +52,7 @@ class SignUpPageState extends State {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    confirmpasswordController.dispose();
+    confirmPasswordController.dispose();
     phoneController.dispose();
     super.dispose();
   }
@@ -75,7 +75,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
-                    //name textfiled
+                    //name textFiled
                     TextFormField(
                         controller: nameController,
                         decoration:  InputDecoration(
@@ -104,7 +104,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
-                    //email textfiled
+                    //email textFiled
                     TextFormField(
                         controller: emailController,
                         decoration:  InputDecoration(
@@ -133,7 +133,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
-                    //password textfiled
+                    //password textFiled
                     TextFormField(
                         controller: passwordController,
                         decoration:  InputDecoration(
@@ -163,9 +163,9 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
-                    // confirm password textfiled
+                    // confirm password textFiled
                     TextFormField(
-                        controller: confirmpasswordController,
+                        controller: confirmPasswordController,
                         decoration:  InputDecoration(
                           enabledBorder:  OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.white),
@@ -188,7 +188,7 @@ class SignUpPageState extends State {
                             return 'Field is required';
                           }
                           //confirming password
-                          if(confirmpasswordController.text != passwordController.text){
+                          if(confirmPasswordController.text != passwordController.text){
                             return 'Password does not match!';
                           }
                           return null;
@@ -197,7 +197,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
-                    //phone number textfiled
+                    //phone number textFiled
                     TextFormField(
                         controller: phoneController,
                         decoration:  InputDecoration(

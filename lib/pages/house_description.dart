@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:github_app/local_storage/hive_storage.dart';
 import 'package:github_app/models/house.dart';
@@ -5,7 +7,6 @@ import 'package:github_app/models/house.dart';
 
 class HomeDescription extends StatefulWidget {
   final House house;
-
   const HomeDescription({Key? key, required this.house}) : super(key: key);
 
   @override
@@ -13,7 +14,6 @@ class HomeDescription extends StatefulWidget {
 }
 
 class HomeDescriptionState extends State<HomeDescription> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +31,9 @@ class HomeDescriptionState extends State<HomeDescription> {
                 widget.house.isFavorite = !widget.house.isFavorite;
                 widget.house.save();
                 setState(() {});
-              },
-
+                },
             )
           ],
-
         ),
         body: Column(
             children: [
@@ -57,10 +55,31 @@ class HomeDescriptionState extends State<HomeDescription> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  HiveStorage.deleteHouse(widget.house);
-                },
+                  showDialog(context: context,
+                      builder: (BuildContext context) => CupertinoAlertDialog(
+                    title: Text('Alert'),
+                    content: Text('Do you want to delete the ad?'),
+                    actions: <Widget>[
+                      CupertinoDialogAction(
+                        isDefaultAction: true,
+                        child: Text("NO"),
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      CupertinoDialogAction(
+                        isDefaultAction: true,
+                        child: Text("Yes"),
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  )
+                  );
+                  },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red, // Background color
+                  backgroundColor: Colors.red,
                 ),
                 child: const Text('Delete'),
               )
