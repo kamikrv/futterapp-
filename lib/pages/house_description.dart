@@ -9,17 +9,17 @@ class HomeDescription extends StatefulWidget {
   const HomeDescription({Key? key, required this.house}) : super(key: key);
 
   @override
-  _HomeDescriptionState createState() => _HomeDescriptionState();
+  HomeDescriptionState createState() => HomeDescriptionState();
 }
 
-class _HomeDescriptionState extends State<HomeDescription> {
+class HomeDescriptionState extends State<HomeDescription> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey,
-          title: Text('Roof.kz'),
+          title: const Text('Roof.kz'),
           centerTitle: true,
           actions: <Widget>[
             IconButton(

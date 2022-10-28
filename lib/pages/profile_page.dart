@@ -21,11 +21,19 @@ class _ProfileTabState extends State<ProfileTab> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children:[
+              const SizedBox(
+                width: 200,
+                height: 15,
+              ),
               ElevatedButton(
                 onPressed: (){
                   FirebaseAuth.instance.signOut();
                   },
                 child: const Text('Sing out'),
+              ),
+              const SizedBox(
+                width: 200,
+                height: 200,
               ),
             ]
         )

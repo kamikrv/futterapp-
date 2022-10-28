@@ -42,9 +42,11 @@ class SignInPageState extends State {
                         width: 200,
                         height: 100,
                       ),
+                      //icon of the house
                       const Icon(Icons.house,
                       size: 100,
                       color: Colors.grey,),
+                      //label text
                       const Text('Roof.kz',
                       style: TextStyle(
                           color: Colors.grey,
@@ -54,12 +56,17 @@ class SignInPageState extends State {
                         width: 200,
                         height: 150,
                       ),
+                      //email textfiled
                       TextFormField(
                           controller: _emailController,
                           decoration:  InputDecoration(
                             enabledBorder:  OutlineInputBorder(
                                 borderSide: const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(12)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(color: Colors.blue),
                             ),
                             prefixIcon: const Icon(Icons.person),
                             hintStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -68,6 +75,7 @@ class SignInPageState extends State {
                             filled: true,
                             border: const OutlineInputBorder(),
                           ),
+                          //validation
                           validator: (value){
                             if (value == null || value.isEmpty) {
                               return 'Field is required';
@@ -79,12 +87,17 @@ class SignInPageState extends State {
                         width: 200,
                         height: 15,
                       ),
+                      // password textfiled
                       TextFormField(
                           controller: _passwordController,
                           decoration:  InputDecoration(
                             enabledBorder:  OutlineInputBorder(
                                 borderSide: const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(12)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.blue),
                             ),
                             prefixIcon: const Icon(Icons.lock),
                             labelText: 'Password',
@@ -93,6 +106,7 @@ class SignInPageState extends State {
                             border: const OutlineInputBorder(),
                           ),
                           obscureText: true,
+                          //validation
                           validator: (value){
                             if (value == null || value.isEmpty) {
                               return 'Field is required';
@@ -104,6 +118,7 @@ class SignInPageState extends State {
                         width: 200,
                         height: 15,
                       ),
+                      // forgot password link
                       GestureDetector(
                         onTap: () { Navigator.push(context,
                             MaterialPageRoute(builder: (context){
@@ -121,6 +136,7 @@ class SignInPageState extends State {
                         width: 200,
                         height: 15,
                       ),
+                      //sign in button
                       ElevatedButton (
                         onPressed: signIn,
                         style: ElevatedButton.styleFrom(
@@ -135,11 +151,13 @@ class SignInPageState extends State {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              //text
                               const Text('Do not have an account? ',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
+                              // sign up link
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push(

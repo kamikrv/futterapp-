@@ -9,6 +9,7 @@ class SignUpPage extends StatefulWidget {
   @override
   SignUpPageState createState() => SignUpPageState();
 }
+final _formKey = GlobalKey<FormState>();
 
 class SignUpPageState extends State {
   final nameController = TextEditingController();
@@ -17,11 +18,19 @@ class SignUpPageState extends State {
   final confirmpasswordController = TextEditingController();
   final phoneController = TextEditingController();
 
+
+  // Authenticate user
   Future signUp() async{
-    if(passwordConfirmed()) {
+    // validation
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      //massage
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
-          password: passwordController.text.trim()
+          password: passwordController.text.trim(),
       );
       usersDetails(
         nameController.text.trim(),
@@ -30,20 +39,12 @@ class SignUpPageState extends State {
     }
   }
 
+  //adding users details
   Future usersDetails(String name, int phoneNumber) async{
     await FirebaseFirestore.instance.collection('usersD').add({
       'Name': name,
       'Phone  number': phoneNumber,
     });
-  }
-
-  bool passwordConfirmed(){
-    if(passwordController.text.trim() == confirmpasswordController.text.trim()){
-      return true;
-    }
-    else{
-      return false;
-    }
   }
 
   @override
@@ -64,6 +65,7 @@ class SignUpPageState extends State {
           centerTitle: true,
         ),
         body: Form(
+          key: _formKey,
             child: Padding(
               padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
               child:Column(
@@ -73,6 +75,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
+                    //name textfiled
                     TextFormField(
                         controller: nameController,
                         decoration:  InputDecoration(
@@ -80,12 +83,17 @@ class SignUpPageState extends State {
                               borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12)
                           ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.blue)
+                          ),
                           prefixIcon: const Icon(Icons.drive_file_rename_outline),
                           labelText: 'Name:',
                           fillColor: Colors.grey.shade200,
                           filled: true,
                           border: const OutlineInputBorder(),
                         ),
+                        //validation
                         validator: (value){
                           if (value == null || value.isEmpty) {
                             return 'Field is required';
@@ -96,6 +104,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
+                    //email textfiled
                     TextFormField(
                         controller: emailController,
                         decoration:  InputDecoration(
@@ -103,12 +112,17 @@ class SignUpPageState extends State {
                               borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12)
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(color: Colors.blue),
+                          ),
                           prefixIcon: const Icon(Icons.email),
                           labelText: 'e-mail:',
                           fillColor: Colors.grey.shade200,
                           filled: true,
                           border: const OutlineInputBorder(),
                         ),
+                        //validation
                         validator: (value){
                           if (value == null || value.isEmpty) {
                             return 'Field is required';
@@ -119,12 +133,17 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
+                    //password textfiled
                     TextFormField(
                         controller: passwordController,
                         decoration:  InputDecoration(
                           enabledBorder:  OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(color: Colors.blue),
                           ),
                           prefixIcon: const Icon(Icons.password),
                           labelText: 'Password:',
@@ -133,6 +152,7 @@ class SignUpPageState extends State {
                           border: const OutlineInputBorder(),
                         ),
                         obscureText: true,
+                        //validation
                         validator: (value){
                           if (value == null || value.isEmpty) {
                             return 'Field is required';
@@ -143,12 +163,17 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
+                    // confirm password textfiled
                     TextFormField(
                         controller: confirmpasswordController,
                         decoration:  InputDecoration(
                           enabledBorder:  OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(color: Colors.blue),
                           ),
                           prefixIcon: const Icon(Icons.password),
                           labelText: 'Confirm password:',
@@ -157,9 +182,14 @@ class SignUpPageState extends State {
                           border: const OutlineInputBorder(),
                         ),
                         obscureText: true,
+                        //validation
                         validator: (value){
                           if (value == null || value.isEmpty) {
                             return 'Field is required';
+                          }
+                          //confirming password
+                          if(confirmpasswordController.text != passwordController.text){
+                            return 'Password does not match!';
                           }
                           return null;
                         }),
@@ -167,6 +197,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
+                    //phone number textfiled
                     TextFormField(
                         controller: phoneController,
                         decoration:  InputDecoration(
@@ -174,12 +205,17 @@ class SignUpPageState extends State {
                               borderSide: const BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.circular(12)
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(color: Colors.blue),
+                          ),
                           prefixIcon: const Icon(Icons.phone),
                           labelText: 'Phone number:',
                           fillColor: Colors.grey.shade200,
                           filled: true,
                           border: const OutlineInputBorder(),
                         ),
+                        //validation
                         validator: (value){
                           if (value == null || value.isEmpty) {
                             return 'Field is required';
@@ -190,6 +226,7 @@ class SignUpPageState extends State {
                       width: 200,
                       height: 15,
                     ),
+                    // sign up button
                     ElevatedButton (
                       onPressed: signUp,
                       style: ElevatedButton.styleFrom(
@@ -209,3 +246,4 @@ class SignUpPageState extends State {
     );
   }
 }
+
