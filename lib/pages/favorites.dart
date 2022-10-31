@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:github_app/local_storage/hive_storage.dart';
 import '../models/house.dart';
 import 'house_description.dart';
@@ -27,13 +28,7 @@ class _FavoritesTabState extends State<FavoritesTab> {
   }
 
   Future<void> _getData() async {
-    houses.clear();
-    List<House> allHouses = await HiveStorage.loadHouses();
-    for (var h in allHouses) {
-      if (h.isFavorite == true) {
-        houses.add(h);
-      }
-    }
+    houses = await HiveStorage.loadHouses();
   }
 
   @override
@@ -44,7 +39,11 @@ class _FavoritesTabState extends State<FavoritesTab> {
           title: const Text('Roof.kz'),
           centerTitle: true,
         ),
-        body: RefreshIndicator(
+        body: FocusDetector(
+          onFocusGained: () {
+            setState(() {});
+            },
+    child: RefreshIndicator(
           onRefresh: refresh,
           child: Padding(
           padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
@@ -89,6 +88,7 @@ class _FavoritesTabState extends State<FavoritesTab> {
               }
               ),
           )
+    )
         )
     );
   }

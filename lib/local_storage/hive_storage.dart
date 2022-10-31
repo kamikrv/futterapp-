@@ -9,9 +9,11 @@ class HiveStorage {
     box ??= await Hive.openBox(boxName);
   }
 
-  static Future saveHouse(House house) async {
+  static Future<House> saveHouse(House house) async {
     await initBox();
-    box!.add(house);
+    final savedHouseKey = await box!.add(house);
+    final savedHouse = box!.values.where((element) => element.key == savedHouseKey).first;
+    return savedHouse;
   }
 
   static Future<List<House>> loadHouses() async {

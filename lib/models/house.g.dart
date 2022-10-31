@@ -23,8 +23,7 @@ class HouseAdapter extends TypeAdapter<House> {
       area: fields[3] as String,
       url: fields[4] as String,
       description: fields[5] as String,
-      isFavorite: fields[6] == null ? false : fields[6] as bool,
-    );
+    )..firebaseId = fields[7] as String?;
   }
 
   @override
@@ -43,8 +42,8 @@ class HouseAdapter extends TypeAdapter<House> {
       ..write(obj.url)
       ..writeByte(5)
       ..write(obj.description)
-      ..writeByte(6)
-      ..write(obj.isFavorite);
+      ..writeByte(7)
+      ..write(obj.firebaseId);
   }
 
   @override

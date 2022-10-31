@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:github_app/models/house.dart';
 import 'package:github_app/pages/house/widgets/house_card.dart';
 import '../house_description.dart';
@@ -17,12 +18,12 @@ class HomeState extends State<Home> {
 
   //Get document IDs
   Future getDocId() async{
+    houses = [];
     await FirebaseFirestore.instance
         .collection('add_new')
         .orderBy('Price', descending: false)
         .get()
-        .then(
-            (snapshot) => snapshot.docs.forEach((document) {
+        .then((snapshot) => snapshot.docs.forEach((document) {
               try{
                 final house = House.fromFirebase(document.reference.id, document.data());
                 houses.add(house);
@@ -54,13 +55,20 @@ class HomeState extends State<Home> {
           title: const Text('Roof.kz'),
           centerTitle: true,
         ),
-        body: Center(
+        body: FocusDetector(
+          onFocusGained: () {
+            setState(() {
+
+            });
+          },
+          child: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
+                    //
                       child: FutureBuilder(
-                           future: getDocId(),
+                          future: getDocId(),
                           builder: (context, snapshot){
                             return ListView.builder(
                                 itemCount: houses.length,
@@ -83,6 +91,7 @@ class HomeState extends State<Home> {
                 ]
             )
         )
+      )
     );
 
 

@@ -14,6 +14,20 @@ class HomeDescription extends StatefulWidget {
 }
 
 class HomeDescriptionState extends State<HomeDescription> {
+  House? houseHive;
+
+  Future init() async {
+    final housesHive = await HiveStorage.loadHouses();
+    for(final house in housesHive) {
+      if (house.firebaseId == widget.house.firebaseId) {
+        houseHive = house;
+        setState(() {});
+        break;
+      }
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,67 +38,87 @@ class HomeDescriptionState extends State<HomeDescription> {
           actions: <Widget>[
             IconButton(
               icon: Icon(
-                  widget.house.isFavorite ? Icons.star :
-                  Icons.star_border_outlined
+                  houseHive == null ? Icons.star_border_outlined :
+                  Icons.star
               ),
               onPressed: () async {
-                widget.house.isFavorite = !widget.house.isFavorite;
-                widget.house.save();
+                if (houseHive == null) {
+                  houseHive = await HiveStorage.saveHouse(widget.house);
+                }else{
+                  await houseHive?.delete();
+                  houseHive = null;
+                }
                 setState(() {});
                 },
             )
           ],
         ),
-        body: Column(
-            children: [
-              Image(
-                image: NetworkImage(widget.house.url),
-                width: 950,
-                height: 500,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+        body:FutureBuilder(
+          future: init(),
+          builder: (context, snapshot) {
+            return Column(
                 children: [
-                  Text('Price:  ${widget.house.price}'),
-                  Text('Count of rooms:  ${widget.house.countRooms}'),
-                  Text('City:  ${widget.house.city}'),
-                  Text('Description:  ${widget.house.description}'),
-                  const Padding(padding: EdgeInsets.only(left: 15),),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  showDialog(context: context,
-                      builder: (BuildContext context) => CupertinoAlertDialog(
-                    title: Text('Alert'),
-                    content: Text('Do you want to delete the ad?'),
-                    actions: <Widget>[
-                      CupertinoDialogAction(
-                        isDefaultAction: true,
-                        child: Text("NO"),
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      CupertinoDialogAction(
-                        isDefaultAction: true,
-                        child: Text("Yes"),
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
+                  Image(
+                    image: NetworkImage(widget.house.url),
+                    width: 950,
+                    height: 500,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Price:  ${widget.house.price}'),
+                      Text('Count of rooms:  ${widget.house.countRooms}'),
+                      Text('City:  ${widget.house.city}'),
+                      Text('Description:  ${widget.house.description}'),
+                      const Padding(padding: EdgeInsets.only(left: 15),),
+                    ],),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(context: context,
+                          builder: (BuildContext context) =>
+                              CupertinoAlertDialog(
+                                title: const Text('Alert'),
+                                content: const Text(
+                                    'Do you want to delete the ad?'),
+                                actions: <Widget>[
+                                  CupertinoDialogAction(
+                                    isDefaultAction: true,
+                                    child: const Text("NO"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  CupertinoDialogAction(
+                                    isDefaultAction: true,
+                                    child: const Text("Yes"),
+                                    onPressed: () {
+                                      try {
+                                        FirebaseFirestore.instance.collection(
+                                            'add_new').doc(
+                                            widget.house.firebaseId).delete();
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        // });
+                                      } catch (error) {
+                                        print("Firebase error: ${error
+                                            .toString()}");
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    child: const Text('Delete'),
                   )
-                  );
-                  },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                ),
-                child: const Text('Delete'),
-              )
-            ]
-        )
+                ]
+            );
+          }
+          )
     );
   }
 }
