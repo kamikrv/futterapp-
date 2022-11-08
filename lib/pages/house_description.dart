@@ -27,7 +27,6 @@ class HomeDescriptionState extends State<HomeDescription> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,9 +49,48 @@ class HomeDescriptionState extends State<HomeDescription> {
                 }
                 setState(() {});
                 },
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete
+              ),
+              onPressed: () async {
+                showDialog(context: context,
+                    builder: (BuildContext context) =>
+                        CupertinoAlertDialog(
+                          title: const Text('Alert'),
+                          content: const Text(
+                              'Do you want to delete the ad?'),
+                          actions: <Widget>[
+                            CupertinoDialogAction(
+                              isDefaultAction: true,
+                              child: const Text("NO"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            CupertinoDialogAction(
+                              isDefaultAction: true,
+                              child: const Text("Yes"),
+                              onPressed: () {
+                                try {
+                                  FirebaseFirestore.instance.collection(
+                                      'add_new').doc(
+                                      widget.house.firebaseId).delete();
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                  // });
+                                } catch (error) {
+                                  print("Firebase error: ${error
+                                      .toString()}");
+                                }
+                              },
+                            ),
+                          ],
+                        )
+                );
+              },
             )
-          ],
-        ),
+          ]),
         body:FutureBuilder(
           future: init(),
           builder: (context, snapshot) {
@@ -73,48 +111,6 @@ class HomeDescriptionState extends State<HomeDescription> {
                       Text('Description:  ${widget.house.description}'),
                       const Padding(padding: EdgeInsets.only(left: 15),),
                     ],),
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog(context: context,
-                          builder: (BuildContext context) =>
-                              CupertinoAlertDialog(
-                                title: const Text('Alert'),
-                                content: const Text(
-                                    'Do you want to delete the ad?'),
-                                actions: <Widget>[
-                                  CupertinoDialogAction(
-                                    isDefaultAction: true,
-                                    child: const Text("NO"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  CupertinoDialogAction(
-                                    isDefaultAction: true,
-                                    child: const Text("Yes"),
-                                    onPressed: () {
-                                      try {
-                                        FirebaseFirestore.instance.collection(
-                                            'add_new').doc(
-                                            widget.house.firebaseId).delete();
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                        // });
-                                      } catch (error) {
-                                        print("Firebase error: ${error
-                                            .toString()}");
-                                      }
-                                    },
-                                  ),
-                                ],
-                              )
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    child: const Text('Delete'),
-                  )
                 ]
             );
           }

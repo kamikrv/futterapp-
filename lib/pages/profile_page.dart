@@ -16,7 +16,13 @@ class _ProfileTabState extends State<ProfileTab> {
         backgroundColor: Colors.grey,
         title: const Text('Roof.kz'),
     centerTitle: true,
-        ),
+            actions: <Widget>[
+        IconButton(
+        icon: const Icon( Icons.output),
+      onPressed: () async {
+        FirebaseAuth.instance.signOut();
+      }),
+        ]),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -24,16 +30,6 @@ class _ProfileTabState extends State<ProfileTab> {
               const SizedBox(
                 width: 200,
                 height: 15,
-              ),
-              ElevatedButton(
-                onPressed: (){
-                  FirebaseAuth.instance.signOut();
-                  },
-                child: const Text('Sing out'),
-              ),
-              const SizedBox(
-                width: 200,
-                height: 200,
               ),
             ]
         )
