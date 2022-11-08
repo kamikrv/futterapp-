@@ -9,22 +9,16 @@ class SignInPage extends StatefulWidget {
   @override
   SignInPageState createState() => SignInPageState();
 }
-final _formKey = GlobalKey<FormState>();
 
 class SignInPageState extends State {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  Future signIn() async {
-    // validation
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // authorisation
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-    }
+  Future signIn() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
   }
 
   @override
@@ -37,9 +31,7 @@ class SignInPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
             child: Padding(
                 padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
                 child: GestureDetector(
@@ -64,7 +56,7 @@ class SignInPageState extends State {
                         width: 200,
                         height: 150,
                       ),
-                      //email textFiled
+                      //email textfiled
                       TextFormField(
                           controller: _emailController,
                           decoration:  InputDecoration(
@@ -89,12 +81,13 @@ class SignInPageState extends State {
                               return 'Field is required';
                             }
                             return null;
-                          }),
+                          }
+                          ),
                       const SizedBox(
                         width: 200,
                         height: 15,
                       ),
-                      // password textFiled
+                      // password textfiled
                       TextFormField(
                           controller: _passwordController,
                           decoration:  InputDecoration(
@@ -119,8 +112,8 @@ class SignInPageState extends State {
                               return 'Field is required';
                             }
                             return null;
-                          }),
-
+                          }
+                          ),
                       const SizedBox(
                         width: 200,
                         height: 15,
@@ -187,7 +180,6 @@ class SignInPageState extends State {
                 )
             )
         )
-    )
     );
   }
 }

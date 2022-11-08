@@ -30,12 +30,12 @@ class House extends HiveObject{
 
   factory House.fromFirebase(String id, Map map) {
     final house = House(
-      price: (map['Price'] ?? 0).toString(),
-      countRooms: (map['Count of rooms'] ?? 0).toString(),
-      city: map['City'] ?? '-',
-      area: (map['Total area']).toString(),
-      url: map['Image'] ?? 'https://i.pinimg.com/736x/29/bf/1f/29bf1f05eafffb8a2ac992ed4456c8c1.jpg',
-      description: map['Description'] ?? '-',
+        price: (map['Price'] ?? 0).toString(),
+        countRooms: (map['Count of rooms'] ?? 0).toString(),
+        city: map['City'] ?? '-',
+        area: (map['Total area']).toString(),
+        url: map['Image'] ?? 'https://i.pinimg.com/736x/29/bf/1f/29bf1f05eafffb8a2ac992ed4456c8c1.jpg',
+        description: map['Description'] ?? '-',
     );
     house.firebaseId = id;
     return house;

@@ -9,36 +9,35 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-  final user = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey,
-          title: const Text('Roof.kz'),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                icon: const Icon(Icons.output),
-                onPressed: () async {
-                  FirebaseAuth.instance.signOut();
-                }
-                )
-          ],
+        backgroundColor: Colors.grey,
+        title: const Text('Roof.kz'),
+    centerTitle: true,
         ),
-        body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children:[
-                const SizedBox(
-              width: 200,
-              height: 15,
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:[
+              const SizedBox(
+                width: 200,
+                height: 15,
               ),
-            Text('Your email: ${user.email!}', style: const TextStyle(fontSize: 30, color: Colors.grey ),)
-              ]
+              ElevatedButton(
+                onPressed: (){
+                  FirebaseAuth.instance.signOut();
+                  },
+                child: const Text('Sing out'),
+              ),
+              const SizedBox(
+                width: 200,
+                height: 200,
+              ),
+            ]
         )
-    )
+      )
     );
   }
 }

@@ -34,7 +34,7 @@ class AddNewTabState extends State{
             cityController.text.trim(),
             int.parse(areaController.text.trim()),
             imageController.text.trim(),
-            descriptionController.text.trim(),
+            descriptionController.text.trim()
         );
       }
     }
@@ -265,6 +265,22 @@ class AddNewTabState extends State{
                         backgroundColor: Colors.blue,
                       ),
                       onPressed: addNew,
+                      //     ()
+                      // async {
+                      //   final house = House(
+                      //     price: priceController.value.text,
+                      //     countRooms: countRoomsController.value.text,
+                      //     city: cityController.value.text,
+                      //     area: areaController.value.text,
+                      //     url: imageController.value.text,
+                      //     description: descriptionController.value.text,
+                      //     isFavorite: false,
+                      //   );
+                      //     await HiveStorage.saveHouse(house);
+                      //     final houses = await HiveStorage.loadHouses();
+                      //     print(houses.length.toString());
+                      //   }
+                      // },
                       child: const Text('Add')
                   )
                 ]
