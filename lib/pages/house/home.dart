@@ -16,25 +16,51 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   List<House> houses = [];
 
+  bool isRequesting = false;
+
   //Get document IDs
   Future getDocId() async{
-    houses = [];
-    await FirebaseFirestore.instance
-        .collection('add_new')
-        .get()
+    if (isRequesting) {
+      return;
+    }else{
+      setState(() {
+        isRequesting = true;
+        houses = [];
+      });
+    }
+
+    print('getDocId');
+
+    await FirebaseFirestore.instance.collection('add_new').get()
         .then((snapshot) => snapshot.docs.forEach((document) {
-              try{
-                final house = House.fromFirebase(document.reference.id, document.data());
-                houses.add(house);
-              }catch(error){
-                print("Firebase error: ${error.toString()}");
-              }
-            })
+      try{
+        //print('dva');
+        final house = House.fromFirebase(document.reference.id, document.data());
+        houses.add(house);
+        // print('tri');
+      }catch(error){
+        print("Firebase error: ${error.toString()}");
+      }
+    })
     );
+    setState(() {
+      isRequesting = false;
+    });
+  }
+
+  @override
+  void initState() {
+    requestData();
+    super.initState();
+  }
+
+  void requestData() async {
+    await getDocId();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('begin');
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey,
@@ -45,42 +71,31 @@ class HomeState extends State<Home> {
           padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
             child: FocusDetector(
               onFocusGained: () {
-                 setState(() {});
-          },
-          child: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    //output houses
-                      child: FutureBuilder(
-                          future: getDocId(),
-                          builder: (context, snapshot){
-                            return ListView.builder(
-                                itemCount: houses.length,
-                                itemBuilder: (context, index){
-                                  final house = houses[index];
-                                  print(houses.length);
-                                  //cards with houses
-                                  return HouseCard(
-                                      house: house,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) =>  HomeDescription(house: house,)),
-                                        );
-                                      }
-                                  );
-                                }
-                                );
-                          }
-                          )
-                  ),
-                ]
+                requestData();
+              },
+              child: isRequesting
+                ? const Center(
+                    child: CircularProgressIndicator()
+                ) : ListView.builder(
+                itemCount: houses.length,
+                itemBuilder: (context, index){
+                  final house = houses[index];
+                  print(houses.length);
+                  //cards with houses
+                  return HouseCard(
+                      house: house,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  HomeDescription(house: house,)),
+                        );
+                      }
+                  );
+                  print('get');
+                  }
+                ),
             )
           )
-            )
-        )
     );
   }
 }

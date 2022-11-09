@@ -11,6 +11,7 @@ class ProfileTab extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTab> {
   final user = FirebaseAuth.instance.currentUser;
+  late final VoidCallback onTap;
 
 
   @override
@@ -27,21 +28,28 @@ class _ProfileTabState extends State<ProfileTab> {
         FirebaseAuth.instance.signOut();
       }),
         ]),
-        body:  Padding(
-            padding:const EdgeInsets.fromLTRB(20, 16, 8, 16),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
+        body: Padding(
+                padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                child: Column(
+                  children: [
                   const SizedBox(
-                    width: 200,
+                    width: 100,
                     height: 15,
                   ),
-                      Text('sing in as: ${user?.email!}',
+                      Text('Your email: ${user?.email!}',
                         style: const TextStyle(
                             height: 2,
                             fontSize: 20,
                             color: Colors.black45),),
+                  const SizedBox(
+                    width: 100,
+                    height: 70,
+                  ),
+                  const Text('Do not remember your password?',
+                      style: TextStyle(
+                      height: 2,
+                      fontSize: 20,
+                      color: Colors.black45),),
                   GestureDetector(
                     onTap: () { Navigator.push(context,
                         MaterialPageRoute(builder: (context){
@@ -49,14 +57,14 @@ class _ProfileTabState extends State<ProfileTab> {
                         })
                     );
                   },
-                    child: const Text('Do not remember your password?',
+                    child: const Text('You  can recover your password',
                       style: TextStyle(
                           height: 2,
                           fontSize: 20,
-                          color: Colors.black45),),
+                          color: Colors.blue),),
                     ),
                   const SizedBox(
-                    width: 200,
+                    width: 100,
                     height: 15,
                   ),
                 ]

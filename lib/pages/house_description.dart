@@ -91,7 +91,8 @@ class HomeDescriptionState extends State<HomeDescription> {
               },
             )
           ]),
-        body:FutureBuilder(
+        body: Scrollbar(
+        child: FutureBuilder(
           future: init(),
           builder: (context, snapshot) {
             return Column(
@@ -135,6 +136,7 @@ class HomeDescriptionState extends State<HomeDescription> {
             );
           }
           )
+        )
     );
   }
 }
