@@ -19,7 +19,8 @@ class _ProfileTabState extends State<ProfileTab> {
     return Scaffold(
         appBar: AppBar(
         backgroundColor: Colors.grey,
-        title: const Text('Roof.kz'),
+        title: Text('${user?.email!}',
+          ),
     centerTitle: true,
             actions: <Widget>[
         IconButton(
@@ -32,18 +33,13 @@ class _ProfileTabState extends State<ProfileTab> {
                 padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
                 child: Column(
                   children: [
+                Image(
+                image: NetworkImage('https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o='),
+        ),
+
                   const SizedBox(
                     width: 100,
                     height: 15,
-                  ),
-                      Text('Your email: ${user?.email!}',
-                        style: const TextStyle(
-                            height: 2,
-                            fontSize: 20,
-                            color: Colors.black45),),
-                  const SizedBox(
-                    width: 100,
-                    height: 70,
                   ),
                   const Text('Do not remember your password?',
                       style: TextStyle(
