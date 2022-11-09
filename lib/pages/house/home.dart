@@ -21,7 +21,6 @@ class HomeState extends State<Home> {
     houses = [];
     await FirebaseFirestore.instance
         .collection('add_new')
-        .orderBy('Price', descending: false)
         .get()
         .then((snapshot) => snapshot.docs.forEach((document) {
               try{
@@ -34,19 +33,6 @@ class HomeState extends State<Home> {
     );
   }
 
-  //Hive storage load houses
-  // @override
-  // void didChangeDependencies() async {
-  //   houses = await HiveStorage.loadHouses();
-  //   super.didChangeDependencies();
-  // }
-  // refresh screen
-  // Future refresh() async {
-  //   houses = await HiveStorage.loadHouses();
-  //   setState(()  {
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,18 +41,18 @@ class HomeState extends State<Home> {
           title: const Text('Roof.kz'),
           centerTitle: true,
         ),
-        body: FocusDetector(
-          onFocusGained: () {
-            setState(() {
-
-            });
+        body: Padding(
+          padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+            child: FocusDetector(
+              onFocusGained: () {
+                 setState(() {});
           },
           child: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    //
+                    //output houses
                       child: FutureBuilder(
                           future: getDocId(),
                           builder: (context, snapshot){
@@ -74,6 +60,7 @@ class HomeState extends State<Home> {
                                 itemCount: houses.length,
                                 itemBuilder: (context, index){
                                   final house = houses[index];
+                                  //cards with houses
                                   return HouseCard(
                                       house: house,
                                       onTap: () {
@@ -90,23 +77,9 @@ class HomeState extends State<Home> {
                   ),
                 ]
             )
+          )
+            )
         )
-      )
     );
-
-
-        // body:
-        // // RefreshIndicator(
-        // //     onRefresh: refresh,
-        //      Padding(
-        //       padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
-        //       child: ListView.builder(
-        //           itemCount: houses.length,
-        //           itemBuilder: (BuildContext context, int index) {
-        //             House house = houses[index];
-        //             return
-        //           }
-        //           ),
-        //     )
   }
 }

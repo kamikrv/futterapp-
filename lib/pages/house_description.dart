@@ -105,10 +105,30 @@ class HomeDescriptionState extends State<HomeDescription> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Price:  ${widget.house.price}'),
-                      Text('Count of rooms:  ${widget.house.countRooms}'),
-                      Text('City:  ${widget.house.city}'),
-                      Text('Description:  ${widget.house.description}'),
+                      Text('Price:  ${widget.house.price}',
+                        style: const TextStyle(
+                            height: 2,
+                            fontSize: 20,
+                            color: Colors.black45),
+                      ),
+                      Text('Count of rooms:  ${widget.house.countRooms}',
+                        style: const TextStyle(
+                            height: 2,
+                            fontSize: 20,
+                            color: Colors.black45),
+                      ),
+                      Text('City:  ${widget.house.city}',
+                        style: const TextStyle(
+                            height: 2,
+                            fontSize: 20,
+                            color: Colors.black45),
+                      ),
+                      Text('Description:  ${widget.house.description}',
+                        style: const TextStyle(
+                            height: 2,
+                            fontSize: 20,
+                            color: Colors.black45),
+                      ),
                       const Padding(padding: EdgeInsets.only(left: 15),),
                     ],),
                 ]

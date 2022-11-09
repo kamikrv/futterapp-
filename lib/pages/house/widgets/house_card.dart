@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:github_app/models/house.dart';
 
@@ -29,9 +28,21 @@ class HouseCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Price: ${house.price}'),
-                            Text('Count of rooms: ${house.countRooms}'),
-                            Text('City: ${house.city}'),
+                            Text('Price: ${house.price}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 15,
+                                  color: Colors.black45),),
+                            Text('Count of rooms: ${house.countRooms}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 15,
+                                  color: Colors.black45),),
+                            Text('City: ${house.city}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 15,
+                                  color: Colors.black45),),
                           ]
                       ),
                     ]
