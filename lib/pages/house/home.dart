@@ -60,6 +60,7 @@ class HomeState extends State<Home> {
                                 itemCount: houses.length,
                                 itemBuilder: (context, index){
                                   final house = houses[index];
+                                  print(houses.length);
                                   //cards with houses
                                   return HouseCard(
                                       house: house,
