@@ -29,7 +29,8 @@ class HomeDescriptionState extends State<HomeDescription> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SingleChildScrollView(
+        child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey,
           title: const Text('Roof.kz'),
@@ -142,6 +143,7 @@ class HomeDescriptionState extends State<HomeDescription> {
                       ]
                   );
                 })
+            )
         );
   }
 }

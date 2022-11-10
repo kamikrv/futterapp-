@@ -29,15 +29,11 @@ class HomeState extends State<Home> {
       });
     }
 
-    print('getDocId');
-
     await FirebaseFirestore.instance.collection('add_new').get()
         .then((snapshot) => snapshot.docs.forEach((document) {
       try{
-        //print('dva');
         final house = House.fromFirebase(document.reference.id, document.data());
         houses.add(house);
-        // print('tri');
       }catch(error){
         print("Firebase error: ${error.toString()}");
       }
@@ -59,9 +55,7 @@ class HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    print('begin');
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey,
           title: const Text('Roof.kz'),
@@ -80,7 +74,6 @@ class HomeState extends State<Home> {
                 itemCount: houses.length,
                 itemBuilder: (context, index){
                   final house = houses[index];
-                  print(houses.length);
                   //cards with houses
                   return HouseCard(
                       house: house,
@@ -91,11 +84,9 @@ class HomeState extends State<Home> {
                         );
                       }
                   );
-                  print('get');
                   }
                 ),
             )
           )
     );
   }
-}
