@@ -91,52 +91,57 @@ class HomeDescriptionState extends State<HomeDescription> {
               },
             )
           ]),
-        body: Scrollbar(
-        child: FutureBuilder(
-          future: init(),
-          builder: (context, snapshot) {
-            return Column(
-                children: [
-                  Image(
-                    image: NetworkImage(widget.house.url),
-                    width: 950,
-                    height: 500,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Price:  ${widget.house.price}',
-                        style: const TextStyle(
-                            height: 2,
-                            fontSize: 20,
-                            color: Colors.black45),
-                      ),
-                      Text('Count of rooms:  ${widget.house.countRooms}',
-                        style: const TextStyle(
-                            height: 2,
-                            fontSize: 20,
-                            color: Colors.black45),
-                      ),
-                      Text('City:  ${widget.house.city}',
-                        style: const TextStyle(
-                            height: 2,
-                            fontSize: 20,
-                            color: Colors.black45),
-                      ),
-                      Text('Description:  ${widget.house.description}',
-                        style: const TextStyle(
-                            height: 2,
-                            fontSize: 20,
-                            color: Colors.black45),
-                      ),
-                      const Padding(padding: EdgeInsets.only(left: 15),),
-                    ],),
-                ]
-            );
-          }
-          )
-        )
-    );
+            body: FutureBuilder(
+                       future: init(),
+                        builder: (context, snapshot) {
+                         return Column(
+                         children: [
+                           Image(
+                              image: NetworkImage(widget.house.url),
+                              width: 450,
+                              height: 300,
+                              fit: BoxFit.fill,
+                             ),
+                           const SizedBox(
+                            width: 100,
+                            height: 40,
+                        ),
+                          Padding(
+                          padding:const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Price:  ${widget.house.price}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 20,
+                                  color: Colors.black45),
+                            ),
+                            Text('Count of rooms:  ${widget.house.countRooms}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 20,
+                                  color: Colors.black45),
+                            ),
+                            Text('City:  ${widget.house.city}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 20,
+                                  color: Colors.black45),
+                            ),
+                            Text('Description:  ${widget.house.description}',
+                              style: const TextStyle(
+                                  height: 2,
+                                  fontSize: 20,
+                                  color: Colors.black45),
+                            ),
+                          ],
+                          ),
+                          )
+                      ]
+                  );
+                })
+        );
   }
 }

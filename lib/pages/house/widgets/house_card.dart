@@ -22,6 +22,7 @@ class HouseCard extends StatelessWidget {
                         image: NetworkImage(house.url),
                         width: 150,
                         height: 150,
+                        fit: BoxFit.fill,
                       ),
                       const SizedBox(width: 10),
                       Column(
