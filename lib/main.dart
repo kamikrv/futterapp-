@@ -1,4 +1,4 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+//import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:github_app/pages/add_new.dart';
 import 'package:github_app/pages/favorites.dart';
@@ -36,77 +36,77 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late PageController _pageController;
-  int _Page=0;
+  //late PageController _pageController;
+  //int _Page=0;
 
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _pageController = PageController();
+  // }
 
-  // final  _tabs = [
-  //   Home(),
-  //   FavoritesTab(),
-  //   AddNewTab(),
-  //   ProfileTab()
-  // ];
-  //
+  final  _tabs = [
+    const Home(),
+    const FavoritesTab(),
+    const AddNewTab(),
+    const ProfileTab()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: PageView(
-            controller: _pageController,
-            children: const <Widget>[
-              Home(),
-              FavoritesTab(),
-              AddNewTab(),
-              ProfileTab()
+       body: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.star),
+                  label: 'Favorites'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add),
+                  label: 'Add new'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'My profile'),
             ],
-            onPageChanged: (int index) {
-              setState(() {
-                _pageController.jumpToPage(index);
-              });
-            }
-        ),
-        bottomNavigationBar: CurvedNavigationBar(
-      backgroundColor: Colors.transparent,
-        color: Colors.grey,
-        animationDuration: const Duration(milliseconds: 500),
-          animationCurve: Curves.easeInOutBack,
-          index:3,
-          items: const <Widget> [
-            Icon(Icons.home, color: Colors.white,),
-            Icon(Icons.star, color: Colors.white,),
-            Icon(Icons.add, color: Colors.white,),
-            Icon(Icons.person, color: Colors.white,),
-          ],
-        onTap: (index){
-    _pageController.jumpToPage(index);
-        },)
-    );
+          ),
+          tabBuilder: (BuildContext context, index) {
+            return _tabs[index];
+          },
+        // body: PageView(
+        //     controller: _pageController,
+        //     children: const <Widget>[
+        //       Home(),
+        //       FavoritesTab(),
+        //       AddNewTab(),
+        //       ProfileTab()
+        //     ],
+        //     onPageChanged: (int index) {
+        //       setState(() {
+        //         _pageController.jumpToPage(index);
+        //       });
+        //     }
+        // ),
 
-      // CupertinoTabScaffold(
-      // tabBar: CupertinoTabBar(
-      //         items: const [
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.home),
-      //         label: 'Home'),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.star),
-      //           label: 'Favorites'),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.add),
-      //           label: 'Add new'),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.person),
-      //           label: 'My profile'),
-      //         ],
-      //       ),
-      //       tabBuilder: (BuildContext context, index) {
-      //         return _tabs[index];
-      //   },
-    //);
+    //     bottomNavigationBar: CurvedNavigationBar(
+    //   backgroundColor: Colors.transparent,
+    //     color: Colors.grey,
+    //     animationDuration: const Duration(milliseconds: 500),
+    //       animationCurve: Curves.easeInOutBack,
+    //       index:3,
+    //       items: const <Widget> [
+    //         Icon(Icons.home, color: Colors.white,),
+    //         Icon(Icons.star, color: Colors.white,),
+    //         Icon(Icons.add, color: Colors.white,),
+    //         Icon(Icons.person, color: Colors.white,),
+    //       ],
+    //     onTap: (index){
+    // _pageController.jumpToPage(index);
+    //     },)
+    )
+    );
   }
 }
 

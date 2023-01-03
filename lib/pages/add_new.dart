@@ -8,6 +8,26 @@ class AddNewTab extends StatefulWidget {
   @override
   AddNewTabState createState() => AddNewTabState();
 }
+// class HouseImage extends StatefulWidget{
+//   const HouseImage({
+//     super.key,
+//     required this.initials;
+//   });
+//
+//   final String initials;
+//
+//   @override
+//   State<HouseImage> createState() => _HouseImageState();
+// }
+//
+// class _HouseImageState extends State<HouseImage>{
+//   File? _image;
+//
+//   @override
+//   Widget build(BuildContext context){
+//     return Container();
+//   }
+// }
 final _formKey = GlobalKey<FormState>();
 
 class AddNewTabState extends State{
