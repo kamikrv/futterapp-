@@ -69,7 +69,6 @@ class _FavoritesTabState extends State<FavoritesTab> {
                                 image: NetworkImage(house.url),
                                 width: 150,
                                 height: 150,
-                                fit: BoxFit.fill,
                               ),
                               const SizedBox(width: 10),
                               Column(

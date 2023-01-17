@@ -36,20 +36,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //late PageController _pageController;
-  //int _Page=0;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _pageController = PageController();
-  // }
-
   final  _tabs = [
     const Home(),
     const FavoritesTab(),
     const AddNewTab(),
-    const ProfileTab()
+    const ProfileImage(initials: '',)
   ];
 
   @override
@@ -75,37 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           tabBuilder: (BuildContext context, index) {
             return _tabs[index];
           },
-        // body: PageView(
-        //     controller: _pageController,
-        //     children: const <Widget>[
-        //       Home(),
-        //       FavoritesTab(),
-        //       AddNewTab(),
-        //       ProfileTab()
-        //     ],
-        //     onPageChanged: (int index) {
-        //       setState(() {
-        //         _pageController.jumpToPage(index);
-        //       });
-        //     }
-        // ),
-
-    //     bottomNavigationBar: CurvedNavigationBar(
-    //   backgroundColor: Colors.transparent,
-    //     color: Colors.grey,
-    //     animationDuration: const Duration(milliseconds: 500),
-    //       animationCurve: Curves.easeInOutBack,
-    //       index:3,
-    //       items: const <Widget> [
-    //         Icon(Icons.home, color: Colors.white,),
-    //         Icon(Icons.star, color: Colors.white,),
-    //         Icon(Icons.add, color: Colors.white,),
-    //         Icon(Icons.person, color: Colors.white,),
-    //       ],
-    //     onTap: (index){
-    // _pageController.jumpToPage(index);
-    //     },)
-    )
+       )
     );
   }
 }
